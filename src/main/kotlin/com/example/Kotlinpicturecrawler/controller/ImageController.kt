@@ -13,43 +13,35 @@ import org.springframework.web.servlet.ModelAndView
 import javax.servlet.http.HttpServletRequest
 
 
-//@Controller
 @RestController
 class ImageController {
 
     @Autowired lateinit var imageRepository: ImageRepository
 
-//    @RequestMapping(value = ["/", "sotu_view"], method = [RequestMethod.GET])
     @GetMapping("/sotu_view")
     fun sotuView(model: Model, request: HttpServletRequest): ModelAndView {
         model.addAttribute("requestURI", request.requestURI)
         return ModelAndView("sotu_view")
     }
 
-//    @RequestMapping(value = ["sotu_gank_view"], method = [RequestMethod.GET])
     @GetMapping("/sotu_gank_view")
     fun sotuGankView(model: Model, request: HttpServletRequest): ModelAndView {
         model.addAttribute("requestURI", request.requestURI)
         return ModelAndView("sotu_gank_view")
     }
 
-//    @RequestMapping(value = ["sotu_favorite_view"], method = [RequestMethod.GET])
     @GetMapping("/sotu_favorite_view")
     fun sotuFavoriteView(model: Model, request: HttpServletRequest): ModelAndView {
         model.addAttribute("requestURI", request.requestURI)
         return ModelAndView("sotu_favorite_view")
     }
 
-//    @RequestMapping(value = ["sotuJson"], method = [RequestMethod.GET])
-//    @ResponseBody
     @GetMapping("/sotuJson")
     fun sotuJson(@RequestParam(value = "page", defaultValue = "0") page: Int,
                  @RequestParam(value = "size", defaultValue = "10") size: Int): Page<Image> {
         return getPageResult(page, size)
     }
 
-//    @RequestMapping(value = ["sotuSearchJson"], method = [RequestMethod.GET])
-//    @ResponseBody
     @GetMapping("/sotuSearchJson")
     fun sotuSearchJson(@RequestParam(value = "page", defaultValue = "0") page: Int,
                        @RequestParam(value = "size", defaultValue = "10") size: Int,
@@ -57,8 +49,6 @@ class ImageController {
         return getPageResult(page, size, searchText)
     }
 
-//    @RequestMapping(value = ["sotuGankSearchJson"], method = [RequestMethod.GET])
-//    @ResponseBody
     @GetMapping("/sotuGankSearchJson")
     fun sotuGankSearchJson(@RequestParam(value = "page", defaultValue = "0") page: Int,
                            @RequestParam(value = "size", defaultValue = "10") size: Int,
@@ -66,8 +56,6 @@ class ImageController {
         return getGankPageResult(page, size, searchText)
     }
 
-//    @RequestMapping(value = ["sotuSearchFavoriteJson"], method = [RequestMethod.GET])
-//    @ResponseBody
     @GetMapping("/sotuSearchFavoriteJson")
     fun sotuSearchFavoriteJson(@RequestParam(value = "page", defaultValue = "0") page: Int,
                                @RequestParam(value = "size", defaultValue = "10") size: Int,
@@ -75,17 +63,12 @@ class ImageController {
         return getFavoritePageResult(page, size, searchText)
     }
 
-
-//    @RequestMapping(value = ["addFavorite"], method = arrayOf(RequestMethod.POST))
-//    @ResponseBody
     @PostMapping("/addFavorite")
     fun addFavorite(@RequestParam(value = "id") id: Long): Boolean {
         imageRepository.addFavorite(id)
         return true
     }
 
-//    @RequestMapping(value = ["delete"], method = arrayOf(RequestMethod.POST))
-//    @ResponseBody
     @PostMapping("/delete")
     fun delete(@RequestParam(value = "id") id: Long): Boolean {
         imageRepository.delete(id)
