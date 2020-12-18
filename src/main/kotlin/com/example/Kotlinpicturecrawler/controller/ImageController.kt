@@ -77,13 +77,13 @@ class ImageController {
 
 
     private fun getPageResult(page: Int, size: Int): Page<Image> {
-        val sort = Sort(Sort.Direction.DESC, mutableListOf<String>("id"))
+        val sort = Sort.by(Sort.Direction.DESC, "id")
         val pageable = PageRequest.of(page, size, sort)
         return imageRepository.findAll(pageable)
     }
 
     private fun getPageResult(page: Int, size: Int, searchText: String): Page<Image> {
-        val sort = Sort(Sort.Direction.DESC, "id")
+        val sort = Sort.by(Sort.Direction.DESC, "id")
         // 注意：PageRequest.of(page,size,sort) page 默认是从0开始
         val pageable = PageRequest.of(page, size, sort)
         if (searchText == "") {
@@ -94,7 +94,7 @@ class ImageController {
     }
 
     private fun getGankPageResult(page: Int, size: Int, searchText: String): Page<Image> {
-        val sort = Sort(Sort.Direction.DESC, "id")
+        val sort = Sort.by(Sort.Direction.DESC, "id")
         // 注意：PageRequest.of(page,size,sort) page 默认是从0开始
         val pageable = PageRequest.of(page, size, sort)
         if (searchText == "") {
@@ -105,7 +105,7 @@ class ImageController {
     }
 
     private fun getFavoritePageResult(page: Int, size: Int, searchText: String): Page<Image> {
-        val sort = Sort(Sort.Direction.DESC, "id")
+        val sort = Sort.by(Sort.Direction.DESC, "id")
         val pageable = PageRequest.of(page, size, sort)
         if (searchText == "") {
             val allFavorite = imageRepository.findAllFavorite(pageable)

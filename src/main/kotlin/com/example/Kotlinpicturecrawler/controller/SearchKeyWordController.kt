@@ -21,7 +21,7 @@ class SearchKeyWordController {
     }
 
     private fun getPageResult(page: Int, size: Int, searchText: String): Page<SearchKeyWord> {
-        val sort = Sort(Sort.Direction.DESC, "id")
+        val sort = Sort.by(Sort.Direction.DESC, "id")
         val pageable = PageRequest.of(page, size, sort)
         if (searchText == "") {
             return searchKeyWordRepository.findAll(pageable)
