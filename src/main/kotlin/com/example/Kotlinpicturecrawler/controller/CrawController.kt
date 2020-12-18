@@ -25,7 +25,7 @@ class CrawController {
         return "doBaiduImageCrawJob JOB Started"
     }
 
-    @GetMapping("/doGankImageCrawJob")
+    @GetMapping("/doBatchUpdateJob")
     fun BatchUpdateJob(): String {
         batchUpdateJob.job()
         return "BatchUpdateJob Started"
